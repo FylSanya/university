@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 
-//Вариант 1, 4x-7sin(x), a = –2, b = 2, Метод - MI 
+//Г‚Г Г°ГЁГ Г­ГІ 1, 4x-7sin(x), a = вЂ“2, b = 2, ГЊГҐГІГ®Г¤ - MI 
 
 double functionY(double x);
 double functionF(double x);
