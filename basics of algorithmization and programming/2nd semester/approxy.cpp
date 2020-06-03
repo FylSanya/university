@@ -1,35 +1,35 @@
 #include <iostream>
 #include <cmath>
-#include <iomanip> 
-
+#include <iomanip>
+ 
 using namespace std;
-
-
+ 
+ 
 void fillingX(int, int, int, double*);
 void fillingY(double*, double*, int);
 void showSheet(double*, double*, double*, double*, int, int);
 void solution(const double* x, const double* y, double** x_matrix, double* y_matrix, int n, int m, double* c);
 void fillingJ(int a, int b, int j, double* x_j, double* y_j);
 void poly(int j, int n, double* x_j, double* y_j, const double* c, double* polynomial);
-
-
+ 
+ 
 int main() {
-
+ 
     int a = -2, b = 3, m = 11, n = 3, j = 21;
-    double *x = new double[m], 
-            *x_j = new double[j - 1], 
-            *y_j = new double[j - 1], 
-            *y = new double[m], 
-            *y_matrix = new double[3], 
+    double *x = new double[m],
+            *x_j = new double[j - 1],
+            *y_j = new double[j - 1],
+            *y = new double[m],
+            *y_matrix = new double[3],
             *c = new double[n + 1],
             *polynomial = new double[j],
             **x_matrix = new double* [n + 1];
-
-
+ 
+ 
     for (int i = 0; i < n + 1; i++) {
         x_matrix[i] = new double[n + 1];
     }
-
+ 
     fillingX(a, b, m, x);
     fillingY(y, x, m);
     fillingJ(a, b, j, x_j, y_j);
@@ -37,38 +37,38 @@ int main() {
     solution(x, y, x_matrix, y_matrix, n, m, c);
     poly(j, n, x_j, y_j, c, polynomial);
 }
-
-
-
-void fillingX(int a, int b, int m, double* x) { // заполнение исков
-    for (int i = 1; i <= m; i++) { // начинаем с i = 1, ибо так в условии
+ 
+ 
+ 
+void fillingX(int a, int b, int m, double* x) { // Р·Р°РїРѕР»РЅРµРЅРёРµ РёСЃРєРѕРІ
+    for (int i = 1; i <= m; i++) { // РЅР°С‡РёРЅР°РµРј СЃ i = 1, РёР±Рѕ С‚Р°Рє РІ СѓСЃР»РѕРІРёРё
         double temp = a + (((i - 1.0) * (b - a)) / (m - 1));
         x[i - 1] = temp;
     }
 }
-
-
-void fillingY(double* y, double* x, int m) { // заполнение игреков
+ 
+ 
+void fillingY(double* y, double* x, int m) { // Р·Р°РїРѕР»РЅРµРЅРёРµ РёРіСЂРµРєРѕРІ
     for (int i = 0; i < m; i++) {
         y[i] = (4 * x[i]) - (7 * sin(x[i]));
     }
 }
-
-
+ 
+ 
 void fillingJ(int a, int b, int j, double* x_j, double* y_j) {
-
-    for (int i = 1; i <= j; i++) { // начинаем с i = 1, ибо так в условии
+ 
+    for (int i = 1; i <= j; i++) { // РЅР°С‡РёРЅР°РµРј СЃ i = 1, РёР±Рѕ С‚Р°Рє РІ СѓСЃР»РѕРІРёРё
         double temp = a + (((i - 1.0) * (b - a)) / 20.0);
-        x_j[i - 1] = temp; // чтобы не оставлять x[0] = непонятно чему, заполняем его с нуля
+        x_j[i - 1] = temp; // С‡С‚РѕР±С‹ РЅРµ РѕСЃС‚Р°РІР»СЏС‚СЊ x[0] = РЅРµРїРѕРЅСЏС‚РЅРѕ С‡РµРјСѓ, Р·Р°РїРѕР»РЅСЏРµРј РµРіРѕ СЃ РЅСѓР»СЏ
     }
-
+ 
     for (int i = 0; i < j; i++) {
         y_j[i] = (4 * x_j[i]) - (7 * sin(x_j[i]));
     }
 }
-
-
-void showSheet(double* x, double* y, double* x_j, double* y_j, int m, int j) { // вывод всего-всего
+ 
+ 
+void showSheet(double* x, double* y, double* x_j, double* y_j, int m, int j) { // РІС‹РІРѕРґ РІСЃРµРіРѕ-РІСЃРµРіРѕ
     cout << "x: ";
     for (int i = 0; i < m; i++) {
         cout << x[i] << " ";
@@ -83,25 +83,25 @@ void showSheet(double* x, double* y, double* x_j, double* y_j, int m, int j) { /
     }
     cout << '\n';
 }
-
-
-void solution(const double* x, const double* y, double** x_matrix, double* y_matrix, int n, int m, double* c) { // тут мы создаём матрицы для полинома и свободные члены
+ 
+ 
+void solution(const double* x, const double* y, double** x_matrix, double* y_matrix, int n, int m, double* c) { // С‚СѓС‚ РјС‹ СЃРѕР·РґР°С‘Рј РјР°С‚СЂРёС†С‹ РґР»СЏ РїРѕР»РёРЅРѕРјР° Рё СЃРІРѕР±РѕРґРЅС‹Рµ С‡Р»РµРЅС‹
     for (int i = 0; i < n + 1; i++) {
         for (int j = 0; j < n + 1; j++) {
-            int cell = i + j;// cell = i+j - в точке (0;0) матрицы у нас просто число, далее в (0;1) - x^cell, в (1;0) - х^cell и т.д.
+            int cell = i + j;// cell = i+j - РІ С‚РѕС‡РєРµ (0;0) РјР°С‚СЂРёС†С‹ Сѓ РЅР°СЃ РїСЂРѕСЃС‚Рѕ С‡РёСЃР»Рѕ, РґР°Р»РµРµ РІ (0;1) - x^cell, РІ (1;0) - С…^cell Рё С‚.Рґ.
             double sum_x = 0;
             for (int p = 0; p < m; p++)
-                sum_x += pow(x[p], cell); // находим сумму всех иксов
+                sum_x += pow(x[p], cell); // РЅР°С…РѕРґРёРј СЃСѓРјРјСѓ РІСЃРµС… РёРєСЃРѕРІ
             x_matrix[i][j] = sum_x;
         }
-
-        //массив свободных членов
+ 
+        //РјР°СЃСЃРёРІ СЃРІРѕР±РѕРґРЅС‹С… С‡Р»РµРЅРѕРІ
         double sum_y = 0;
         for (int f = 0; f < m; f++)
             sum_y += y[f] * pow(x[f], i);
         y_matrix[i] = sum_y;
-
-        //вывод
+ 
+        //РІС‹РІРѕРґ
         if (i == 3) {
             cout << '\n';
             for (int d = 0, g = i; d < g + 1; d++) {
@@ -111,8 +111,8 @@ void solution(const double* x, const double* y, double** x_matrix, double* y_mat
             cout << endl;
         }
     }
-
-    //метод Гаусса
+ 
+    //РјРµС‚РѕРґ Р“Р°СѓСЃСЃР°
     for (int j = 0; j < n + 1; j++) {
         for (int i = j + 1; i < n + 1; i++) {
             double factor = (x_matrix[i][j]) / (x_matrix[j][j]);
@@ -122,16 +122,16 @@ void solution(const double* x, const double* y, double** x_matrix, double* y_mat
             y_matrix[i] -= (factor * y_matrix[j]);
         }
     }
-
-    for (int q = 0; q < n + 1; q++) { // приведение главной диагонали к единицам
+ 
+    for (int q = 0; q < n + 1; q++) { // РїСЂРёРІРµРґРµРЅРёРµ РіР»Р°РІРЅРѕР№ РґРёР°РіРѕРЅР°Р»Рё Рє РµРґРёРЅРёС†Р°Рј
         y_matrix[q] /= x_matrix[q][q];
         for (int v = n; v >= 0; v--) {
             x_matrix[q][v] /= (x_matrix[q][q]);
         }
     }
-
-
-    //Вывод матрицы после метода Гаусса
+ 
+ 
+    //Р’С‹РІРѕРґ РјР°С‚СЂРёС†С‹ РїРѕСЃР»Рµ РјРµС‚РѕРґР° Р“Р°СѓСЃСЃР°
     for (int i = 0; i < n + 1; i++) {
         for (int j = 0; j < n + 1; j++) {
             cout << x_matrix[i][j];
@@ -139,45 +139,45 @@ void solution(const double* x, const double* y, double** x_matrix, double* y_mat
         }
         cout << " = " << y_matrix[i] << "\n";
     }
-
-    //нахождение свободных параметров
+ 
+    //РЅР°С…РѕР¶РґРµРЅРёРµ СЃРІРѕР±РѕРґРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ
     for (int i = n; i >= 0; i--) {
         c[i] = y_matrix[i];
         for (int j = i - 1; j >= 0; j--) {
             y_matrix[j] -= x_matrix[j][i] * y_matrix[i];
         }
     }
-
-
-    //вывод исходных параметров
+ 
+ 
+    //РІС‹РІРѕРґ РёСЃС…РѕРґРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ
     cout << endl;
     for (int h = 0; h < n + 1; h++) {
         printf("C%d:%8.5g\n", h + 1, c[h]);
     } cout << endl;
-
+ 
 }
-
-
+ 
+ 
 void poly(int j, int n, double* x_j, double* y_j, const double* c, double* polynomial) {
     for (int i = 0; i < j; i++) {
-
+ 
         polynomial[i] = 0;
-
+ 
         for (int temp = n; temp >= 0; temp--)
             polynomial[i] += c[temp] * pow(x_j[i], temp); //polynomial[i] = c[0] + c[1] * x_j[i] + c[2] * pow(x_j[i], 2) + c[3] * pow(x_j[i], 3);
     }
-
-
-    double* dif = new double[j]; //нахождение погрешности
+ 
+ 
+    double* dif = new double[j]; //РЅР°С…РѕР¶РґРµРЅРёРµ РїРѕРіСЂРµС€РЅРѕСЃС‚Рё
     for (int i = 0; i < j; i++)
         dif[i] = y_j[i] - polynomial[i];
-
-
-    double dif_sum = 0; // нахожения средней погрешности
+ 
+ 
+    double dif_sum = 0; // РЅР°С…РѕР¶РµРЅРёСЏ СЃСЂРµРґРЅРµР№ РїРѕРіСЂРµС€РЅРѕСЃС‚Рё
     for (int i = 0; i < j; i++)
         dif_sum += dif[i] / j;
-
-    //вывод финальной таблицы
+ 
+    //РІС‹РІРѕРґ С„РёРЅР°Р»СЊРЅРѕР№ С‚Р°Р±Р»РёС†С‹
     cout << setw(5) <<"y_j" << setw(15) << "poly"<< setw(15) <<"dif"  << endl;;
     for (int i = 0; i < j; i++) {
         if (y_j[i] == 0) cout << y_j[i] << setw(22);
