@@ -3,7 +3,7 @@
 #include <iomanip>
 
 
-//Вариант 1, f1 = u1/x - u2/e^x +1, f2 = u1/(2x) + u2 - 1, a = 1, b = 3, U1(a) = 2, u2(a) = e, Method - M1
+//Variant 1, f1 = u1/x - u2/e^x +1, f2 = u1/(2x) + u2 - 1, a = 1, b = 3, U1(a) = 2, u2(a) = e, Method - M1
 
 
 void functions(double x, double* y);
@@ -16,12 +16,12 @@ int num_of_h = 20, np = 1, num_of_funcions = 2;
 
 int main()
 {
-	h = (b - a) / num_of_h; //вычисляем шаг
+	h = (b - a) / num_of_h; //РІС‹С‡РёСЃР»СЏРµРј С€Р°Рі
 
-	x = a; // ставим икс в начало 
+	x = a; // Г±ГІГ ГўГЁГ¬ ГЁГЄГ± Гў Г­Г Г·Г Г«Г® 
 
-	y[0] = 2 * x; // определяем первую функцию
-	y[1] = exp(x); // определяем вторую функцию
+	y[0] = 2 * x; // Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ ГЇГҐГ°ГўГіГѕ ГґГіГ­ГЄГ¶ГЁГѕ
+	y[1] = exp(x); // Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ ГўГІГ®Г°ГіГѕ ГґГіГ­ГЄГ¶ГЁГѕ
 
 
 	output(x, y);
@@ -32,7 +32,7 @@ int main()
 		functions(x, y);
 
 		for (int i = 0; i < num_of_funcions; i++)
-			y[i] += h * f[i]; // тут по формуле из методы
+			y[i] += h * f[i]; // ГІГіГІ ГЇГ® ГґГ®Г°Г¬ГіГ«ГҐ ГЁГ§ Г¬ГҐГІГ®Г¤Г»
 
 		x += h; 
 
@@ -43,14 +43,14 @@ int main()
 }
 
 
-void functions(double x, double* y) //вычисление функций
+void functions(double x, double* y) //ГўГ»Г·ГЁГ±Г«ГҐГ­ГЁГҐ ГґГіГ­ГЄГ¶ГЁГ©
 {
 	f[0] = (y[0] / x) - (y[1] / exp(x)) + 1;
 	f[1] = y[0] / (2 * x) + y[1] - 1;
 }
 
 
-void output(double x, double* y) // вывод
+void output(double x, double* y) // ГўГ»ГўГ®Г¤
 {
 	std::cout << "x =" << std::setw(5) << x << std::setw(10) << "y1 =" << std::setw(10) << y[0] << std::setw(10) << "u1 =" << std::setw(5) << 2 * x << std::setw(13) << "d1 =" << std::setw(10) << 2 * x - y[0] << std::endl
 		<< std::setw(18) << "y2 =" << std::setw(10) << y[1] << std::setw(10) << "u2 =" << std::setw(8) << exp(x) << std::setw(10) << "d2 =" << std::setw(10) << exp(x) - y[1] << std::endl << std::endl;
