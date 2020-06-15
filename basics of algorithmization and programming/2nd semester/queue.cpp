@@ -3,10 +3,12 @@
 
 using namespace std;
 
+
 struct queue {
 	int info;
 	queue* next, * prev;
 };
+
 
 void create(queue**, queue**);
 void addBegin(queue*, int);
@@ -19,6 +21,7 @@ void find(queue*, int, int);
 void min(queue*, int size);
 int choice();
 
+
 void main() {
 	setlocale(LC_ALL, "Russian");
 	int n;
@@ -28,7 +31,7 @@ void main() {
 	create(&begin, &end);
 
 	int size;
-	cout << "Размер очереди: ";
+	cout << "Р Р°Р·РјРµСЂ РѕС‡РµСЂРµРґРё: ";
 	cin >> size;
 
 	srand(time(0));
@@ -36,16 +39,16 @@ void main() {
 	bool exit = true;
 	while (exit) {
 		int menu;
-		cout << "\nДля создания очереди нажмите 1 \nДля его просмотра нажмите 2 \nДля нахождения элеента по порядковому номеру нажмите 3 \nДля нахождения минимального элемента нажмите 4 \nДля очистки памяти нажмите 5 \n";
+		cout << "\nР”Р»СЏ СЃРѕР·РґР°РЅРёСЏ РѕС‡РµСЂРµРґРё РЅР°Р¶РјРёС‚Рµ 1 \nР”Р»СЏ РµРіРѕ РїСЂРѕСЃРјРѕС‚СЂР° РЅР°Р¶РјРёС‚Рµ 2 \nР”Р»СЏ РЅР°С…РѕР¶РґРµРЅРёСЏ СЌР»РµРµРЅС‚Р° РїРѕ РїРѕСЂСЏРґРєРѕРІРѕРјСѓ РЅРѕРјРµСЂСѓ РЅР°Р¶РјРёС‚Рµ 3 \nР”Р»СЏ РЅР°С…РѕР¶РґРµРЅРёСЏ РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РЅР°Р¶РјРёС‚Рµ 4 \nР”Р»СЏ РѕС‡РёСЃС‚РєРё РїР°РјСЏС‚Рё РЅР°Р¶РјРёС‚Рµ 5 \n";
 		cin >> menu;
 		switch (menu) {
-		case 1: //создание очереди
+		case 1: //СЃРѕР·РґР°РЅРёРµ РѕС‡РµСЂРµРґРё
 			for (int i = 0; i < size; i++) {
 				n = rand() % 101 - 50;
 				addBegin(begin, n);
 			}
 			break;
-		case 2: //просмотр
+		case 2: //РїСЂРѕСЃРјРѕС‚СЂ
 			switch (choice()) {
 			case 1:
 				viewBegin(begin);
@@ -54,31 +57,32 @@ void main() {
 				viewEnd(end);
 				break;
 			default:
-				cout << "эээ ежжи не та цифра";
+				cout << "СЌСЌСЌ РµР¶Р¶Рё РЅРµ С‚Р° С†РёС„СЂР°";
 				break;
 			}
 			break;
-		case 3: // нахождение по порядковому
+		case 3: // РЅР°С…РѕР¶РґРµРЅРёРµ РїРѕ РїРѕСЂСЏРґРєРѕРІРѕРјСѓ
 			int number;
-			cout << "Введите понядковый номер: ";
+			cout << "Р’РІРµРґРёС‚Рµ РїРѕРЅСЏРґРєРѕРІС‹Р№ РЅРѕРјРµСЂ: ";
 			cin >> number;
 			find(begin, number, size);
 			break;
-		case 4: // поиск минимального
+		case 4: // РїРѕРёСЃРє РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ
 			min(begin, size);
 			break;
-		case 5: // очистка памяти
+		case 5: // РѕС‡РёСЃС‚РєР° РїР°РјСЏС‚Рё
 			delQueue(begin);
 			break;
 		case 6: //exit
 			exit = false;
 			break;
 		default:
-			cout << "эээ ежжи не та цифра";
+			cout << "СЌСЌСЌ РµР¶Р¶Рё РЅРµ С‚Р° С†РёС„СЂР°";
 			break;
 		}
 	}
 }
+
 
 void create(queue **b, queue **e) {
 	*b = new queue;
@@ -89,6 +93,7 @@ void create(queue **b, queue **e) {
 	(*e)->prev = *b;
 }
 
+
 void addBegin(queue *b, int inf){
 	queue* n = new queue;
 	n->info = inf;
@@ -97,6 +102,7 @@ void addBegin(queue *b, int inf){
 	(b->next)->prev = n;
 	b->next = n;
 }
+
 
 void addEnd(queue *e, int inf) {
 	queue* n = new queue;
@@ -107,11 +113,13 @@ void addEnd(queue *e, int inf) {
 	e->prev = n;
 }
 
+
 void del(queue *el) {
 	(el->prev)->next = el->next;
 	(el->next)->prev = el->prev;
 	delete(el);
 }
+
 
 void viewBegin(queue* b) {
 	queue* n = new queue;
@@ -123,6 +131,7 @@ void viewBegin(queue* b) {
 	}
 }
 
+
 void viewEnd(queue* e) {
 	queue* n = new queue;
 	n = e;
@@ -133,12 +142,14 @@ void viewEnd(queue* e) {
 	}
 }
 
+
 int choice() {
 	int answer;
-	cout << "С начала (1) или с конца (2)?\n";
+	cout << "РЎ РЅР°С‡Р°Р»Р° (1) РёР»Рё СЃ РєРѕРЅС†Р° (2)?\n";
 	cin >> answer;
 	return answer;
 }
+
 
 void delQueue(queue* b) {
 	queue* n = new queue;
@@ -156,6 +167,7 @@ void find(queue* b, int number, int size) {
 		cout << b->info << "\n";
 	}
 }
+
 
 void min(queue* b, int size) {
 	queue* temp = b;
