@@ -11,6 +11,7 @@ stack* add(stack*, int);
 void view(stack*);
 void delst(stack*);
 
+
 void main(){
 	int n, number;
 	stack* topall=nullptr;
@@ -51,14 +52,16 @@ void main(){
 	delst(topnegative);
 }
 
-stack* add(stack* top, int info) {
+
+stack* add(stack* top, int info) { //добавить в стэк элемент
 	stack* p = new stack;
 	p->next = top;
 	p->inf = info;
 	return p;
 }
 
-void view(stack* top) {
+
+void view(stack* top) { // просмотерть стэк
 	while (top != NULL) {
 		cout << top->inf << ' ';
 		top = top->next;
@@ -67,7 +70,7 @@ void view(stack* top) {
 }
 
 
-void delst(stack* top) {
+void delst(stack* top) { // удалить стэк
 	stack* temp;
 	while (top != NULL) {
 		temp = top;
